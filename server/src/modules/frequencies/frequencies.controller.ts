@@ -1,4 +1,18 @@
-import { Controller, Param, Get, Post, Body, Put, Delete, HttpStatus, HttpCode, Request, Response } from '@nestjs/common';
+import { 
+    Controller, 
+    Param,
+    Query, 
+    Get, 
+    Post, 
+    Body, 
+    Put, 
+    Delete, 
+    HttpStatus, 
+    HttpCode, 
+    Request, 
+    Response,
+    UseInterceptors, 
+    CacheInterceptor} from '@nestjs/common';
 import { MessageCodeError } from '../common/index';
 import { FrequenciesService } from './frequencies.service';
 
@@ -15,6 +29,13 @@ export class FrequenciesController {
 
     @Get(':id')
     public async one(@Param('id', ) id,) {
-        return this.frequenciesService.getApi(id)
+        return this.frequenciesService.findById(id)
+    }
+
+    @Get(':id/search')
+    @UseInterceptors(CacheInterceptor)
+    public async search(
+        @Param('id',) id, @Query('q',) q) {
+        return this.frequenciesService.search(id, q)
     }
 }

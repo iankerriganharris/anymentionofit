@@ -1,11 +1,10 @@
+import { IFrequencyClient } from './interfaces';
 import * as snoowrap from 'snoowrap';
-import { FrequencyApiRepository } from "./abstracts/FrequencyApiRepository";
 
-export class RedditApi extends FrequencyApiRepository {
+export class Reddit implements IFrequencyClient {
   client: snoowrap;
 
   constructor() {
-    super();
     this.client = new snoowrap({
       userAgent: 'test /u/anymentionofit',
       clientId: 'ozj7OWQR5YX12g',
@@ -17,9 +16,8 @@ export class RedditApi extends FrequencyApiRepository {
   public async search(query, options) {
     return await this.client.search({
       query: query,
-      sort: options.sort,
       time: 'week',
+      ...options
     });
   }
-
 }

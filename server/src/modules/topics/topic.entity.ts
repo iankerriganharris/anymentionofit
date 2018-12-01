@@ -9,7 +9,7 @@ export class Topic {
   @Column({ length: 100 })
   name: string;
 
-  @ManyToMany(type => Scanner)
+  @ManyToMany(type => Scanner, { eager: true})
   @JoinTable()
   scanners: Scanner[];
 }

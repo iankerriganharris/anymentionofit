@@ -4,8 +4,6 @@ import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import { morganLogger } from './modules/common/';
 
-declare const module: any;
-
 async function bootstrap() {
   const app = await NestFactory.create(ApplicationModule);
 
