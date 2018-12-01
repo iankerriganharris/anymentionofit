@@ -1,0 +1,59 @@
+version: '3.7'
+
+x-db-variables: 
+  &db-variables
+  DB_USER: ${DB_USER}
+  DB_PASSWORD: ${DB_PASSWORD}
+  DB_NAME: ${DB_NAME}
+  DB_HOST: ${DB_HOST}
+  DB_PORT: ${DB_POST}
+  DB_TYPE: ${DB_TYPE}
+
+services:
+
+######################
+# postgres container
+######################
+  postgres:
+    container_name: ${DB_HOST}
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    image: postgres:10-alpine
+    ports:
+      - 5432:5432
+    restart: always
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+######################
+# server container
+######################
+  server:
+    build: ./server
+    depends_on:
+      - postgres
+    environment:
+      << : *db-variables
+      NODE_ENV: ${NODE_ENV}
+      APP_SERVER_PORT: 5000
+    ports:
+      - 5000:5000
+    volumes:
+      - ./server/src:/app/src
+      - ~/.aws:/root/.aws:ro
+
+######################
+# client container
+######################
+
+######################
+# end services
+######################
+
+######################
+# named volumes
+######################
+volumes:
+  dbdata:
