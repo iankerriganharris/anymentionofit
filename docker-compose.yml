@@ -48,6 +48,9 @@ services:
       << : *db-variables
       NODE_ENV: ${NODE_ENV}
       CACHE_HOST: ${CACHE_HOST}
+      TWITTER_KEY: ${TWITTER_KEY}
+      TWITTER_SECRET: ${TWITTER_SECRET}
+      TWITTER_BEARER_TOKEN: ${TWITTER_BEARER_TOKEN}
       APP_SERVER_PORT: 5000
     ports:
       - 5000:5000
