@@ -61,6 +61,16 @@ services:
 ######################
 # client container
 ######################
+  client:
+    build: ./client
+    environment:
+    environment:
+      - REACT_APP_PORT=${REACT_APP_PORT}
+    ports:
+      - ${REACT_APP_PORT}:${REACT_APP_PORT}
+    volumes:
+      - ./client/src:/app/src
+      - ./client/public:/app/public
 
 ######################
 # end services
