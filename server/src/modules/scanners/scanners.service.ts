@@ -20,7 +20,7 @@ export class ScannersService implements IScannerService {
   ) { }
 
   public async create(Scanner: CreateScannerDto): Promise<Scanner> {
-    const frequenciesToScan = Scanner.filterFrequencies ? 
+    const frequenciesToScan = Scanner.filterFrequencies && Scanner.filterFrequencies.length ? 
       await this.frequenciesService.findAll({
         id: In(Scanner.filterFrequencies)
       }) : await this.frequenciesService.findAll();

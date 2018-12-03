@@ -1,4 +1,17 @@
-import { Controller, Get, Param, Post, Body, Put, Delete, HttpStatus, HttpCode, Request, Response } from '@nestjs/common';
+import { 
+    Controller, 
+    Get, 
+    Param, 
+    Post, 
+    Body, 
+    Put, 
+    Delete, 
+    HttpStatus, 
+    HttpCode, 
+    Request, 
+    Response,
+    Catch
+} from '@nestjs/common';
 import { MessageCodeError } from '../common/index';
 import { ScannersService } from './scanners.service';
 import { CreateScannerDto } from './CreateScanner.dto';
