@@ -1,10 +1,11 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { MessageCodeError } from '../common/lib/error/MessageCodeError';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, getConnection } from 'typeorm';
 import { IFrequencyService } from './interfaces';
 import { Frequency } from './frequency.entity';
 import { CreateFrequencyDto } from './CreateFrequency.dto';
+import { Result } from '../results/result.entity';
 
 @Injectable()
 export class FrequenciesService implements IFrequencyService {
@@ -27,9 +28,11 @@ export class FrequenciesService implements IFrequencyService {
     return saved;
   }
 
-  public async search(id: number, q: string): Promise<Array<object>> {
-    const frequency = await this.frequenciesRepository.findOne(id);
-    return frequency.client().search(q);
+  public async addResult(frequency: Frequency, result: Result) {
+    return await getConnection()
+      .createQueryBuilder()
+      .relation(Frequency, 'results')
+      .of(frequency)
+      .add(result)
   }
-
 }

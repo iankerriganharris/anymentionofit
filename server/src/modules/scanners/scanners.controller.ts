@@ -7,6 +7,13 @@ import { CreateScannerDto } from './CreateScanner.dto';
 export class ScannersController {
     constructor(private readonly scannersService: ScannersService) { }
 
+    @Post()
+    @HttpCode(201)
+    public async create(@Body() createScannerDto: CreateScannerDto) {
+        const scanner = await this.scannersService.create(createScannerDto);
+        return scanner
+    }
+
     @Get()
     public async index(@Response() res) {
         const Scanners = await this.scannersService.findAll();

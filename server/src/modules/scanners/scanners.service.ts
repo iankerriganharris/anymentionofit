@@ -6,6 +6,7 @@ import { IScannerService } from './interfaces/IScannerService';
 import { Scanner } from './scanner.entity';
 import { CreateScannerDto } from './CreateScanner.dto';
 import { FrequenciesService } from '../frequencies/frequencies.service';
+import { TopicsService } from '../topics/topics.service';
 
 @Injectable()
 export class ScannersService implements IScannerService {
@@ -13,16 +14,10 @@ export class ScannersService implements IScannerService {
     @InjectRepository(Scanner)
     private readonly scannersRepository: Repository<Scanner>,
     @Inject(FrequenciesService)
-    private readonly frequenciesService: FrequenciesService
+    private readonly frequenciesService: FrequenciesService,
+    @Inject(TopicsService)
+    private readonly topicsService: TopicsService
   ) { }
-
-  public async findAll(options?: any): Promise<Array<Scanner>> {
-    return await this.scannersRepository.find(options);
-  }
-
-  public async findById(id: number): Promise<Scanner | null> {
-    return await this.scannersRepository.findOne(id);
-  }
 
   public async create(Scanner: CreateScannerDto): Promise<Scanner> {
     const frequenciesToScan = Scanner.filterFrequencies ? 
@@ -30,9 +25,19 @@ export class ScannersService implements IScannerService {
         id: In(Scanner.filterFrequencies)
       }) : await this.frequenciesService.findAll();
     const createdScanner = await this.scannersRepository.create(Scanner);
+    const createdTopics = await Promise.all(Scanner.topics.map( topic => this.topicsService.create(topic) ))
     createdScanner.frequencies = frequenciesToScan;
+    createdScanner.topics = createdTopics
     const saved: Scanner = await this.scannersRepository.save(createdScanner)
     return saved
+  }
+
+  public async findAll(options?: any): Promise<Array<Scanner>> {
+    return await this.scannersRepository.find(options);
+  }
+
+  public async findById(id: number): Promise<Scanner | null> {
+    return await this.scannersRepository.findOne(id, { relations: ['topics']});
   }
 
 }
