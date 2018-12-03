@@ -1,6 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import { 
+  Entity, Column, PrimaryGeneratedColumn, 
+  ManyToMany, JoinTable, OneToMany } from 'typeorm';
 import { Topic } from '../topics/topic.entity';
 import { Frequency } from '../frequencies/frequency.entity';
+import { Scan } from '../scans/scan.entity';
 
 @Entity()
 export class Scanner {
@@ -17,4 +20,7 @@ export class Scanner {
   @ManyToMany(type => Frequency, { eager: true})
   @JoinTable()
   frequencies: Frequency[];
+
+  @OneToMany(type => Scan, scan => scan.scanner)
+  scans: Scan[];
 }

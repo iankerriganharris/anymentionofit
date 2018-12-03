@@ -32,10 +32,10 @@ export class FrequenciesController {
         return this.frequenciesService.findById(id)
     }
 
-    @Get(':id/search')
-    @UseInterceptors(CacheInterceptor)
-    public async search(
-        @Param('id',) id, @Query('q',) q) {
-        return this.frequenciesService.search(id, q)
-    }
+    // @Get(':id/search')
+    // @UseInterceptors(CacheInterceptor)
+    // public async search(
+    //     @Param('id',) id, @Query('q',) q) {
+    //     return this.frequenciesService.search(id, q)
+    // }
 }

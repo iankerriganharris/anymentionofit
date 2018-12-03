@@ -4,11 +4,13 @@ import { ScannersController } from './scanners.controller';
 import { ScannersService } from './scanners.service';
 import { Scanner } from './scanner.entity';
 import { FrequenciesModule } from '../frequencies/frequencies.module';
+import { TopicsModule } from '../topics/topics.module';
 
 @Module({
     imports: [
         TypeOrmModule.forFeature([Scanner]),
-        FrequenciesModule
+        FrequenciesModule,
+        TopicsModule
     ],
     providers: [ScannersService],
     controllers: [ScannersController],

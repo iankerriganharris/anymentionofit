@@ -1,3 +1,3 @@
 export * from './IFrequency';
 export * from './IFrequencyService';
-export * from './IFrequencyClient';
+export * from './IFrequencyApiRepository';

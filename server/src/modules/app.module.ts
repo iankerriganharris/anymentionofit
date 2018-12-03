@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TopicsModule } from './topics/topics.module';
 import { FrequenciesModule } from './frequencies/frequencies.module';
 import { ScannersModule } from './scanners/scanners.module';
+import { ScansModule } from './scans/scans.module';
 import { 
   databaseConfig,
   winstonLogger } from './common';
@@ -20,6 +21,7 @@ import { WinstonModule } from 'nest-winston';
     TopicsModule,
     FrequenciesModule,
     ScannersModule,
+    ScansModule,
     WinstonModule.forRoot(winstonLogger)
   ]
 })

@@ -9,10 +9,10 @@ import { cacheConfig } from '../common';
 @Module({
     imports: [
         TypeOrmModule.forFeature([Topic]),
-        ScannersModule,
-        CacheModule.register(cacheConfig)
+        // CacheModule.register(cacheConfig)
     ],
     providers: [TopicsService],
     controllers: [TopicsController],
+    exports: [TopicsService],
 })
 export class TopicsModule { }
