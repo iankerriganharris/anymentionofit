@@ -6,9 +6,14 @@
     "@types/jest": "^23.3.10",
     "@types/node": "^10.12.11",
     "@types/react-dom": "^16.0.11",
+    "@types/react-redux": "^6.0.10",
+    "@types/reactstrap": "^6.4.3",
+    "axios": "^0.18.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1",
+    "reactstrap": "^6.5.0",
+    "styled-components": "^4.1.2",
     "typescript": "^3.2.1"
   },
   "scripts": {
@@ -19,6 +24,7 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,md}\"",
     "lint": "tslint 'src/**/*.{ts,tsx}' -p tsconfig.json"
   },
+  "proxy": "http://server:5000/",
   "eslintConfig": {
     "extends": "react-app"
   },
