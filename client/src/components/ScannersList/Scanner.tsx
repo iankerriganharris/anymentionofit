@@ -1,8 +1,5 @@
 import * as React from 'react'
-
-export interface IScanner {
-  name: string
-}
+import { IScanner } from './interfaces'
 
 interface IProps extends IScanner {}
 
