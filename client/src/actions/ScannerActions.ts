@@ -16,13 +16,13 @@ export const fetchScannersError = (): IScannersError => ({
   type: types.FETCH_SCANNERS_ERROR
 })
 
-export const fetchScanners = async (dispatch: Dispatch) => {
+export const fetchScanners = () => async (dispatch: Dispatch) => {
   dispatch(fetchScannersRequest())
 
   try {
     const scanners = await external.getScanners()
-    dispatch(fetchScannersSuccess(scanners))
+    return dispatch(fetchScannersSuccess(scanners))
   } catch (error) {
-    dispatch(fetchScannersError())
+    return dispatch(fetchScannersError())
   }
 }

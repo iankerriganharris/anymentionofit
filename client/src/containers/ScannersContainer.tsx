@@ -6,15 +6,26 @@ import { IScanner } from '../components/ScannersList/interfaces'
 
 interface IProps {
   scanners: IScanner[]
+  isFetching: boolean
   fetchScanners: Function
 }
 
-interface IState {}
+interface IState {
+  scanners: {
+    data: IScanner[]
+    isFetching: boolean
+    fetchScanners: Function
+  }
+}
 
 const ScannersContainer = (props: IProps) => <Scanners {...props} />
 
 const mapStateToProps = (state: IState) => {
-  return {}
+  return {
+    fetchScanners,
+    isFetching: state.scanners.isFetching,
+    scanners: state.scanners.data
+  }
 }
 
 export default connect(
