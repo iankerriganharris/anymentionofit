@@ -14,6 +14,7 @@ interface ScannerSuccessAction {
 type Action = ScannerAction | ScannerSuccessAction
 
 export default function scanners(state = initialState, action: Action) {
+  console.log(state)
   switch (action.type) {
     case types.FETCH_SCANNERS_REQUEST:
       return {
@@ -27,7 +28,8 @@ export default function scanners(state = initialState, action: Action) {
     case types.FETCH_SCANNERS_SUCCESS:
       return {
         ...state,
-        scanners: action.scanners
+        isFetching: false,
+        data: action.scanners
       }
     default:
       return state
