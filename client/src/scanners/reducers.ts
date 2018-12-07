@@ -1,20 +1,12 @@
-import * as types from '../constants'
+// reducer
+import * as types from './types'
+import { IScannerAction, IScannerSuccessAction } from 'anymentionofit/scanners'
 
 const initialState = {}
 
-interface ScannerAction {
-  type: 'FETCH_SCANNERS_REQUEST' | 'FETCH_SCANNERS_ERROR'
-}
+type Action = IScannerAction | IScannerSuccessAction
 
-interface ScannerSuccessAction {
-  type: 'FETCH_SCANNERS_SUCCESS'
-  scanners: object[]
-}
-
-type Action = ScannerAction | ScannerSuccessAction
-
-export default function scanners(state = initialState, action: Action) {
-  console.log(state)
+export default function reducer(state = initialState, action: Action) {
   switch (action.type) {
     case types.FETCH_SCANNERS_REQUEST:
       return {

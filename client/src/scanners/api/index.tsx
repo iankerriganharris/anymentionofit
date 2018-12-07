@@ -1,5 +1,5 @@
-import Axios, { AxiosRequestConfig, AxiosError } from 'axios'
-import { IScanner } from './interfaces'
+import Axios from 'axios'
+import { IScanner } from 'anymentionofit/scanners'
 
 export const getScanners = async (): Promise<IScanner[]> => {
   try {

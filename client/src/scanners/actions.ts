@@ -1,8 +1,9 @@
-import * as types from '../constants'
-import * as external from '../external'
+import * as types from './types'
+import { IScannersRequest, IScannersSuccess, IScannersError } from 'anymentionofit/scanners'
 import { Dispatch } from 'redux'
-import { IScannersRequest, IScannersSuccess, IScannersError } from './interfaces'
+import * as api from './api'
 
+// actions
 export const fetchScannersRequest = (): IScannersRequest => ({
   type: types.FETCH_SCANNERS_REQUEST
 })
@@ -20,7 +21,7 @@ export const fetchScanners = () => async (dispatch: Dispatch) => {
   dispatch(fetchScannersRequest())
 
   try {
-    const scanners = await external.getScanners()
+    const scanners = await api.getScanners()
     return dispatch(fetchScannersSuccess(scanners))
   } catch (error) {
     return dispatch(fetchScannersError())
