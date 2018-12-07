@@ -17,6 +17,9 @@
   "include": [
     "src"
   ],
+  "files": [
+    "src/scanners/index.d.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

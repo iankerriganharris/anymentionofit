@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchScanners } from '../actions/ScannerActions'
-import Scanners from '../components/ScannersList'
-import { IScanner } from '../components/ScannersList/interfaces'
+import { fetchScanners } from './actions'
+import Scanners from './components/ScannersList'
+import { IScanner } from 'anymentionofit/scanners'
 
 interface IProps {
   scanners: IScanner[]
@@ -18,7 +18,7 @@ interface IState {
   }
 }
 
-const ScannersContainer = (props: IProps) => <Scanners {...props} />
+const container = (props: IProps) => <Scanners {...props} />
 
 const mapStateToProps = (state: IState) => {
   return {
@@ -33,4 +33,4 @@ export default connect(
   {
     fetchScanners
   }
-)(ScannersContainer)
+)(container)
