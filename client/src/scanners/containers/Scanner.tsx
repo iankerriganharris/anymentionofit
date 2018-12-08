@@ -3,9 +3,14 @@ import { connect } from 'react-redux'
 import { fetchScannerById } from '../actions'
 import ScannerDetail from '../components/ScannerDetail'
 import { IScanner } from 'anymentionofit/scanners'
+import { RouteComponentProps } from 'react-router'
 
-interface IProps {
-  scanner: IScanner
+interface MatchParams {
+  id: string
+}
+
+interface IProps extends RouteComponentProps<MatchParams> {
+  data: IScanner
   isFetching: boolean
   fetchScannerById: Function
 }
@@ -23,19 +28,35 @@ interface IState {
   }
 }
 
-const container = (props: IProps) => <ScannerDetail {...props} />
+class AsyncScanner extends React.Component<IProps, object> {
+  constructor(props: IProps) {
+    super(props)
+  }
+
+  componentDidMount() {
+    const { id } = this.props.match.params
+    this.props.fetchScannerById(id)
+  }
+
+  componentDidUpdate(prevProps: IProps) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      const { id } = this.props.match.params
+      this.props.fetchScannerById(id)
+    }
+  }
+
+  render() {
+    return <ScannerDetail {...this.props} />
+  }
+}
 
 const mapStateToProps = (state: IState) => {
-  console.log(state)
   return {
-    fetchScannerById,
     ...state.scanners.currentScanner
   }
 }
 
 export default connect(
   mapStateToProps,
-  {
-    fetchScannerById
-  }
-)(container)
+  { fetchScannerById }
+)(AsyncScanner)

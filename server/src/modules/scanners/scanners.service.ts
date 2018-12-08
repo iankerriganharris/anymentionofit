@@ -33,11 +33,11 @@ export class ScannersService implements IScannerService {
   }
 
   public async findAll(options?: any): Promise<Array<Scanner>> {
-    return await this.scannersRepository.find(options);
+    return await this.scannersRepository.find({...options, cache: true});
   }
 
   public async findById(id: number): Promise<Scanner | null> {
-    return await this.scannersRepository.findOne(id, { relations: ['topics']});
+    return await this.scannersRepository.findOne(id, { relations: ['topics'], cache: true});
   }
 
 }

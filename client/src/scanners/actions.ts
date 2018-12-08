@@ -56,7 +56,7 @@ export const fetchScannerByIdError = (): IScannerError => ({
   type: types.FETCH_SCANNER_BY_ID_ERROR
 })
 
-export const fetchScannerById = (id: number) => async (dispatch: Dispatch) => {
+export const fetchScannerById = (id: string) => async (dispatch: Dispatch) => {
   console.log('dispatching by id...')
   dispatch(fetchScannerByIdRequest())
 

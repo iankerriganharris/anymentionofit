@@ -10,7 +10,7 @@ import {
     HttpCode, 
     Request, 
     Response,
-    Catch
+    Catch,
 } from '@nestjs/common';
 import { MessageCodeError } from '../common/index';
 import { ScannersService } from './scanners.service';
