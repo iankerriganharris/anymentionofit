@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, CacheModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Scan } from './scan.entity';
 import { FrequenciesModule } from '../frequencies/frequencies.module';
@@ -12,7 +12,8 @@ import { ResultsModule } from '../results/results.module';
         TypeOrmModule.forFeature([Scan]),
         FrequenciesModule,
         ScannersModule,
-        ResultsModule
+        ResultsModule,
+        CacheModule.register(),
     ],
     providers: [ScansService],
     controllers: [ScansController]

@@ -10,7 +10,7 @@ export const getScanners = async (): Promise<IScanner[]> => {
   }
 }
 
-export const getScannerById = async (id: number): Promise<IScanner> => {
+export const getScannerById = async (id: string): Promise<IScanner> => {
   try {
     const response = await Axios.get(`/scanners/${id}`)
     return response.status === 200 ? response.data : response.statusText

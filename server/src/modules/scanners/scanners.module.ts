@@ -10,7 +10,7 @@ import { TopicsModule } from '../topics/topics.module';
     imports: [
         TypeOrmModule.forFeature([Scanner]),
         FrequenciesModule,
-        TopicsModule
+        TopicsModule,
     ],
     providers: [ScannersService],
     controllers: [ScannersController],

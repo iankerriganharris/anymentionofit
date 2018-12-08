@@ -1,11 +1,11 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { ReactPropTypes, Dispatch } from 'react'
+import { connect, DispatchProp } from 'react-redux'
 import { fetchScanners } from '../actions'
 import Scanners from '../components/ScannersList'
 import { IScanner } from 'anymentionofit/scanners'
 
 interface IProps {
-  scanners?: IScanner[] | undefined
+  data?: IScanner[] | undefined
   isFetching?: boolean | undefined
   fetchScanners: Function
 }
@@ -19,19 +19,25 @@ interface IState {
   }
 }
 
-const container = (props: IProps) => <Scanners {...props} />
+class ScannersList extends React.Component<IProps, object> {
+  constructor(props: IProps) {
+    super(props)
+  }
+  componentDidMount() {
+    this.props.fetchScanners()
+  }
+  render() {
+    return <Scanners {...this.props} />
+  }
+}
 
 const mapStateToProps = (state: IState) => {
-  console.log(state)
   return {
-    fetchScanners,
     ...state.scanners.scannerList
   }
 }
 
 export default connect(
   mapStateToProps,
-  {
-    fetchScanners
-  }
-)(container)
+  { fetchScanners }
+)(ScannersList)
