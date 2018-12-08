@@ -1,27 +1,40 @@
 declare module "anymentionofit/scanners" {
-  export interface IScannersRequest {
+  interface IBaseAction {
     type: string
   }
 
-  export interface IScannersSuccess {
+  export interface IScannersRequest extends IBaseAction {}
+
+  export interface IScannersSuccess extends IBaseAction {
     scanners: object[]
-    type: string
   }
 
-  export interface IScannersError {
-    type: string
-  }
+  export interface IScannersError extends IBaseAction {}
 
   export interface IScanner {
+    id: number
     name: string
+    frequencies: {
+      name: string
+    }[]
   }
 
   export interface IScannerAction {
-    type: 'FETCH_SCANNERS_REQUEST' | 'FETCH_SCANNERS_ERROR'
+    type: 'FETCH_SCANNERS_REQUEST' | 'FETCH_SCANNERS_ERROR' | 'FETCH_SCANNER_BY_ID_REQUEST' | 'FETCH_SCANNER_BY_ID_ERROR'
   }
 
   export interface IScannerSuccessAction {
-    type: 'FETCH_SCANNERS_SUCCESS'
-    scanners: object[]
+    type: 'FETCH_SCANNERS_SUCCESS' | 'FETCH_SCANNER_BY_ID_SUCCESS'
+    scanners?: object[]
+    scanner?: object
   }
+
+  export interface IScannerRequest extends IBaseAction {}
+
+  export interface IScannerSuccess extends IBaseAction {
+    scanner: object
+  }
+
+  export interface IScannerError extends IBaseAction {}
+
 }

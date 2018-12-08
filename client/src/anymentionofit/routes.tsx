@@ -1,10 +1,10 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import { scannersContainer } from '../scanners'
+import { ScannersRoutes } from '../scanners'
 
 const Main = () => (
   <main>
-    <Route path="/scanners" component={scannersContainer} />
+    <Route path="/scanners" component={ScannersRoutes} />
   </main>
 )
 

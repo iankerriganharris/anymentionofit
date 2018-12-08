@@ -1,30 +1,31 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchScanners } from './actions'
-import Scanners from './components/ScannersList'
+import { fetchScanners } from '../actions'
+import Scanners from '../components/ScannersList'
 import { IScanner } from 'anymentionofit/scanners'
 
 interface IProps {
-  scanners: IScanner[]
-  isFetching: boolean
+  scanners?: IScanner[] | undefined
+  isFetching?: boolean | undefined
   fetchScanners: Function
 }
 
 interface IState {
   scanners: {
-    data: IScanner[]
-    isFetching: boolean
-    fetchScanners: Function
+    scannerList: {
+      data: IScanner[]
+      isFetching: boolean
+    }
   }
 }
 
 const container = (props: IProps) => <Scanners {...props} />
 
 const mapStateToProps = (state: IState) => {
+  console.log(state)
   return {
     fetchScanners,
-    isFetching: state.scanners.isFetching,
-    scanners: state.scanners.data
+    ...state.scanners.scannerList
   }
 }
 

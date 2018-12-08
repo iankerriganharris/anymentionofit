@@ -9,10 +9,10 @@ const { store, persistor } = configureStore()
 
 export default () => (
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
-    </PersistGate>
+    {/* <PersistGate loading={null} persistor={persistor}> */}
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
+    {/* </PersistGate> */}
   </Provider>
 )

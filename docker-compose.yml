@@ -66,6 +66,7 @@ services:
     environment:
     environment:
       - REACT_APP_PORT=${REACT_APP_PORT}
+      - NODE_PATH=${NODE_PATH}
     ports:
       - ${REACT_APP_PORT}:${REACT_APP_PORT}
     volumes:
