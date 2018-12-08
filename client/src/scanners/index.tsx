@@ -4,6 +4,6 @@
 
 import reducer from './reducers'
 
-export { default as scannersContainer } from './container'
+export { default as ScannersRoutes } from './routes'
 
 export default reducer

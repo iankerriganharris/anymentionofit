@@ -9,3 +9,12 @@ export const getScanners = async (): Promise<IScanner[]> => {
     return error
   }
 }
+
+export const getScannerById = async (id: number): Promise<IScanner> => {
+  try {
+    const response = await Axios.get(`/scanners/${id}`)
+    return response.status === 200 ? response.data : response.statusText
+  } catch (error) {
+    return error
+  }
+}
