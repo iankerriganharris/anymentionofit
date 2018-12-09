@@ -1,13 +1,13 @@
 import React, { ReactPropTypes, Dispatch } from 'react'
 import { connect, DispatchProp } from 'react-redux'
-import { fetchScanners } from '../actions'
+import { getScanners } from '../actions'
 import Scanners from '../components/ScannersList'
 import { IScanner } from 'anymentionofit/scanners'
 
 interface IProps {
   data?: IScanner[] | undefined
   isFetching?: boolean | undefined
-  fetchScanners: Function
+  getScanners: Function
 }
 
 interface IState {
@@ -24,7 +24,7 @@ class ScannersList extends React.Component<IProps, object> {
     super(props)
   }
   componentDidMount() {
-    this.props.fetchScanners()
+    this.props.getScanners()
   }
   render() {
     return <Scanners {...this.props} />
@@ -39,5 +39,5 @@ const mapStateToProps = (state: IState) => {
 
 export default connect(
   mapStateToProps,
-  { fetchScanners }
+  { getScanners }
 )(ScannersList)

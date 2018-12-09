@@ -7,8 +7,10 @@ import {
   IScannerSuccess,
   IScannerError
 } from 'anymentionofit/scanners'
-import { Dispatch } from 'redux'
+import { Dispatch, AnyAction } from 'redux'
 import * as api from './api'
+import { call, put } from 'redux-saga/effects'
+import { push } from 'connected-react-router'
 
 // actions
 
@@ -28,15 +30,18 @@ export const fetchScannersError = (): IScannersError => ({
   type: types.FETCH_SCANNERS_ERROR
 })
 
-export const fetchScanners = () => async (dispatch: Dispatch) => {
-  console.log('dispatching...')
-  dispatch(fetchScannersRequest())
+export const getScanners = () => ({
+  type: 'GET_SCANNERS'
+})
+
+export function* fetchScanners() {
+  yield put(fetchScannersRequest())
 
   try {
-    const scanners = await api.getScanners()
-    return dispatch(fetchScannersSuccess(scanners))
+    const scanners = yield call(api.getScanners)
+    yield put(fetchScannersSuccess(scanners))
   } catch (error) {
-    return dispatch(fetchScannersError())
+    yield put(fetchScannersError())
   }
 }
 
@@ -56,14 +61,39 @@ export const fetchScannerByIdError = (): IScannerError => ({
   type: types.FETCH_SCANNER_BY_ID_ERROR
 })
 
-export const fetchScannerById = (id: string) => async (dispatch: Dispatch) => {
-  console.log('dispatching by id...')
-  dispatch(fetchScannerByIdRequest())
+export const getScannerById = (id: string) => ({
+  payload: id,
+  type: 'GET_SCANNER_BY_ID'
+})
+
+export function* fetchScannerById({ payload: id }: AnyAction) {
+  yield put(fetchScannerByIdRequest())
 
   try {
-    const scanner = await api.getScannerById(id)
-    return dispatch(fetchScannerByIdSuccess(scanner))
+    const scanner = yield call(api.getScannerById, id)
+    yield put(fetchScannerByIdSuccess(scanner))
   } catch (error) {
-    return dispatch(fetchScannerByIdError())
+    yield put(fetchScannerByIdError())
+  }
+}
+
+export const createScannerSuccess = (scanner: object): IScannerSuccess => ({
+  scanner,
+  type: types.CREATE_SCANNER_SUCCESS
+})
+
+export const createScannerRequest = (data: object) => ({
+  data,
+  type: 'CREATE_SCANNER'
+})
+
+export function* createScanner({ data }: AnyAction) {
+  try {
+    const scanner = yield call(api.postNewScanner, data)
+    console.log(scanner)
+    yield put(createScannerSuccess(scanner))
+    yield put(push('/scanners'))
+  } catch (error) {
+    console.log(error)
   }
 }

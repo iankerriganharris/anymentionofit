@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchScannerById } from '../actions'
+import { getScannerById } from '../actions'
 import ScannerDetail from '../components/ScannerDetail'
 import { IScanner } from 'anymentionofit/scanners'
 import { RouteComponentProps } from 'react-router'
@@ -12,7 +12,7 @@ interface MatchParams {
 interface IProps extends RouteComponentProps<MatchParams> {
   data: IScanner
   isFetching: boolean
-  fetchScannerById: Function
+  getScannerById: Function
 }
 
 interface IState {
@@ -35,13 +35,13 @@ class AsyncScanner extends React.Component<IProps, object> {
 
   componentDidMount() {
     const { id } = this.props.match.params
-    this.props.fetchScannerById(id)
+    this.props.getScannerById(id)
   }
 
   componentDidUpdate(prevProps: IProps) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
       const { id } = this.props.match.params
-      this.props.fetchScannerById(id)
+      this.props.getScannerById(id)
     }
   }
 
@@ -58,5 +58,5 @@ const mapStateToProps = (state: IState) => {
 
 export default connect(
   mapStateToProps,
-  { fetchScannerById }
+  { getScannerById }
 )(AsyncScanner)
