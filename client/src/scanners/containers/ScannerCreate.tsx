@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { createScannerRequest } from '../actions'
 import ScannerForm from '../components/ScannerCreate/Form'
 import { IScanner } from 'anymentionofit/scanners'
+import { RouteComponentProps } from 'react-router'
 
-interface IProps {
+interface IProps extends RouteComponentProps {
   createScannerRequest: Function
 }
 
@@ -12,7 +13,7 @@ interface IState {}
 
 class AsyncScannerForm extends React.Component<IProps, ComponentState> {
   handleSubmit = () => {
-    const request = {
+    const data = {
       name: this.state.name,
       topics: [
         {
@@ -20,8 +21,7 @@ class AsyncScannerForm extends React.Component<IProps, ComponentState> {
         }
       ]
     }
-    console.log(request)
-    return this.props.createScannerRequest(request)
+    return this.props.createScannerRequest(data, this.props.history.push)
   }
 
   handleChange = async (event: FormEvent<HTMLInputElement>) => {

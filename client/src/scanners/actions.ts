@@ -10,7 +10,6 @@ import {
 import { Dispatch, AnyAction } from 'redux'
 import * as api from './api'
 import { call, put } from 'redux-saga/effects'
-import { push } from 'connected-react-router'
 
 // actions
 
@@ -82,17 +81,18 @@ export const createScannerSuccess = (scanner: object): IScannerSuccess => ({
   type: types.CREATE_SCANNER_SUCCESS
 })
 
-export const createScannerRequest = (data: object) => ({
+export const createScannerRequest = (data: object, push: Function) => ({
   data,
+  push,
   type: 'CREATE_SCANNER'
 })
 
-export function* createScanner({ data }: AnyAction) {
+export function* createScanner({ data, push }: AnyAction) {
   try {
     const scanner = yield call(api.postNewScanner, data)
-    console.log(scanner)
+    const { id } = scanner
     yield put(createScannerSuccess(scanner))
-    yield put(push('/scanners'))
+    yield call(push, `/scanners/${id}`)
   } catch (error) {
     console.log(error)
   }
