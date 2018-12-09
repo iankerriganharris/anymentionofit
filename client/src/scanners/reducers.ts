@@ -7,7 +7,6 @@ const initialState = {}
 type Action = IScannerAction | IScannerSuccessAction
 
 export default function reducer(state = initialState, action: Action) {
-  console.log(action)
   switch (action.type) {
     case types.FETCH_SCANNERS_REQUEST:
       return {

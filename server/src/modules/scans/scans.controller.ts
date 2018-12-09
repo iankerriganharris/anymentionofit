@@ -5,7 +5,9 @@ import { CreateScanDto } from './CreateScan.dto';
 
 @Controller('scans')
 export class ScansController {
-    constructor(private readonly scansService: ScansService) { }
+    constructor(
+        private readonly scansService: ScansService
+    ) { }
 
     @Post()
     @HttpCode(201)
