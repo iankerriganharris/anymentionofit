@@ -18,7 +18,9 @@
     "src"
   ],
   "files": [
-    "src/scanners/index.d.ts"
+    "src/scanners/index.d.ts",
+    "src/scans/index.d.ts",
+    "src/results/index.d.ts"
   ],
   "exclude": [
     "node_modules"

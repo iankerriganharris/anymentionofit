@@ -1,6 +1,3 @@
-
-
-
 import { Injectable, Inject } from '@nestjs/common';
 import { MessageCodeError } from '../common/lib/error/MessageCodeError';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -22,6 +19,8 @@ export class ResultsService implements IResultService {
     return saved
   }
 
-}
+  public async findById(id: number): Promise<Result | null> {
+    return await this.resultsRepository.findOne(id, { cache: true});
+  }
 
-  
+}

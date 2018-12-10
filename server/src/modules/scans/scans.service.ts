@@ -25,7 +25,7 @@ export class ScansService implements IScanService {
     @Inject(ResultsService)
     private readonly resultsService: ResultsService,
     @Inject(TopicsService)
-    private readonly topicsService: TopicsService
+    private readonly topicsService: TopicsService,
   ) { }
 
   public async create(scan: CreateScanDto): Promise<Scan> {
@@ -54,6 +54,8 @@ export class ScansService implements IScanService {
     return saved
   }
 
-}
+  public async findById(id: number): Promise<Scan | null> {
+    return await this.scansRepository.findOne(id, { relations: ['scanner', 'results', 'results.topic', 'results.frequency'], cache: true});
+  }
 
-  
+}

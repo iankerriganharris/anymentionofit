@@ -15,4 +15,9 @@ export class ScansController {
         const scan = await this.scansService.create(createScanDto);
         return scan
     }
+
+    @Get(':id')
+    public async one(@Param('id', ) id,) {
+        return this.scansService.findById(id)
+    }
 }
