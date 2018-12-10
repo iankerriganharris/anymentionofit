@@ -14,7 +14,7 @@ interface IProps extends RouteComponentProps<MatchParams> {
 
 interface IState {
   results: {
-    currentScan: object
+    currentResult: object
   }
 }
 
@@ -35,7 +35,7 @@ class ResultDetailContainer extends React.Component<IProps, object> {
 
 const mapStateToProps = (state: IState) => {
   return {
-    ...state.results.currentScan
+    ...state.results.currentResult
   }
 }
 
