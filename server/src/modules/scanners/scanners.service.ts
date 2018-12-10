@@ -37,7 +37,7 @@ export class ScannersService implements IScannerService {
   }
 
   public async findById(id: number): Promise<Scanner | null> {
-    return await this.scannersRepository.findOne(id, { relations: ['topics'], cache: true});
+    return await this.scannersRepository.findOne(id, { relations: ['topics', 'scans'], cache: true});
   }
 
 }

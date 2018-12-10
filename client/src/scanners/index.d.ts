@@ -17,6 +17,10 @@ declare module "anymentionofit/scanners" {
     frequencies: {
       name: string
     }[]
+    scans: {
+      id: string
+      name: string
+    }[]
   }
 
   export interface IScannerAction {

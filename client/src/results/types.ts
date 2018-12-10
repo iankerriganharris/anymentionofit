@@ -1,0 +1,2 @@
+// result types
+export const FETCH_RESULT_BY_ID_SUCCESS = 'FETCH_RESULT_BY_ID_SUCCESS'
