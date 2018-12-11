@@ -1,5 +1,3 @@
+import { Result } from '../result.entity'
 
-import { Result } from '../result.entity';
-
-export interface IResultService {
-}
+export interface IResultService {}

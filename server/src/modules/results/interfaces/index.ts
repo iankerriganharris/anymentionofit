@@ -1,1 +1,1 @@
-export * from './IResultService';
+export * from './IResultService'

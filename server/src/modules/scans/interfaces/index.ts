@@ -1,1 +1,1 @@
-export * from './IScanService';
+export * from './IScanService'

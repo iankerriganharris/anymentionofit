@@ -1,21 +1,15 @@
-import { Module, CacheModule } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Scan } from './scan.entity';
-import { FrequenciesModule } from '../frequencies/frequencies.module';
-import { ScansService } from './scans.service';
-import { ScansController } from './scans.controller';
-import { ScannersModule} from '../scanners/scanners.module';
-import { ResultsModule } from '../results/results.module';
+import { CacheModule, Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { FrequenciesModule } from '../frequencies/frequencies.module'
+import { ResultsModule } from '../results/results.module'
+import { ScannersModule } from '../scanners/scanners.module'
+import { Scan } from './scan.entity'
+import { ScansController } from './scans.controller'
+import { ScansService } from './scans.service'
 
 @Module({
-    imports: [
-        TypeOrmModule.forFeature([Scan]),
-        FrequenciesModule,
-        ScannersModule,
-        ResultsModule,
-        CacheModule.register(),
-    ],
-    providers: [ScansService],
-    controllers: [ScansController]
+  controllers: [ScansController],
+  imports: [TypeOrmModule.forFeature([Scan]), FrequenciesModule, ScannersModule, ResultsModule, CacheModule.register()],
+  providers: [ScansService]
 })
-export class ScansModule { }
+export class ScansModule {}

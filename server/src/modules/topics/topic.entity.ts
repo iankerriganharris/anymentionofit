@@ -1,20 +1,20 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm';
-import { Scanner } from '../scanners/scanner.entity';
-import { Scan } from '../scans/scan.entity';
-import { Result } from '../results/result.entity';
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Result } from '../results/result.entity'
+import { Scanner } from '../scanners/scanner.entity'
+import { Scan } from '../scans/scan.entity'
 
 @Entity()
 export class Topic {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number
 
   @Column({ length: 100 })
-  name: string;
+  public name: string
 
   @ManyToMany(type => Scanner)
   @JoinTable()
-  scanners: Scanner[];
+  public scanners: Scanner[]
 
   @OneToMany(type => Result, result => result.topic)
-  results: Result[];
+  public results: Result[]
 }

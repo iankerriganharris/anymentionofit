@@ -1,8 +1,7 @@
-
 import { CreateTopicDto } from '../topics/CreaterTopic.dto'
 
 export class CreateScannerDto {
-  readonly name: string;
-  readonly topics: Array<CreateTopicDto>;
-  readonly filterFrequencies?: Array<number>;
+  public readonly name: string
+  public readonly topics: CreateTopicDto[]
+  public readonly filterFrequencies?: number[]
 }

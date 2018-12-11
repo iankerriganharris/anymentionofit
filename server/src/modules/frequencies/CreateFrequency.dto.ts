@@ -1,5 +1,3 @@
-
-
 export class CreateFrequencyDto {
-  readonly name: string;
+  public readonly name: string
 }

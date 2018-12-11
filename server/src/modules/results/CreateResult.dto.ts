@@ -1,4 +1,3 @@
-
 export class CreateResultDto {
-  readonly raw: Object;
+  public readonly raw: Object
 }

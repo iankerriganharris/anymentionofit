@@ -1,19 +1,19 @@
-import { IFrequencyClient } from './interfaces';
-import * as snoowrap from 'snoowrap';
-import { redditConfig } from '../common';
+import * as snoowrap from 'snoowrap'
+import { redditConfig } from '../common'
+import { IFrequencyClient } from './interfaces'
 
 export class Reddit implements IFrequencyClient {
-  client: snoowrap;
+  public client: snoowrap
 
   constructor() {
     this.client = new snoowrap(redditConfig)
   }
 
   public async search(query, options) {
-    return await this.client.search({
-      query: query,
+    return this.client.search({
+      query,
       time: 'week',
       ...options
-    });
+    })
   }
 }

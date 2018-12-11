@@ -1,34 +1,32 @@
-import { 
-  Entity, Column, PrimaryGeneratedColumn,
-  OneToMany } from 'typeorm';
-import { Scan } from '../scans/scan.entity';
-import { Inject } from '@nestjs/common';
-import { Reddit } from './reddit.entity';
-import { Twitter } from './twitter.entity';
-import * as constants from './frequency.constants';
-import { IFrequencyClient } from './interfaces';
-import { Result } from '../results/result.entity';
+import { Inject } from '@nestjs/common'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Result } from '../results/result.entity'
+import { Scan } from '../scans/scan.entity'
+import * as constants from './frequency.constants'
+import { IFrequencyClient } from './interfaces'
+import { Reddit } from './reddit.entity'
+import { Twitter } from './twitter.entity'
 
 @Entity()
 export class Frequency {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number
 
   @Column({ length: 100 })
-  name: string;
+  public name: string
 
   @OneToMany(type => Result, result => result.frequency)
-  results: Result[];
+  public results: Result[]
 
   /**
    * client
    */
   get client(): IFrequencyClient {
-    switch(this.name) {
+    switch (this.name) {
       case constants.REDDIT:
-        return new Reddit;
+        return new Reddit()
       case constants.TWITTER:
-        return new Twitter;
+        return new Twitter()
     }
   }
 }

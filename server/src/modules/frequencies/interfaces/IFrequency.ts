@@ -1,4 +1,1 @@
-
-
-export interface IFrequency {
-}
+export interface IFrequency {}

@@ -1,4 +1,3 @@
+export const REDDIT = 'reddit'
 
-export const REDDIT = 'reddit';
-
-export const TWITTER = 'Twitter';
+export const TWITTER = 'Twitter'

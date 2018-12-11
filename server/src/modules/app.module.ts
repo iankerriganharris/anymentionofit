@@ -1,22 +1,20 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { TopicsModule } from './topics/topics.module';
-import { FrequenciesModule } from './frequencies/frequencies.module';
-import { ScannersModule } from './scanners/scanners.module';
-import { ScansModule } from './scans/scans.module';
-import { 
-  databaseConfig,
-  winstonLogger } from './common';
-import { Connection } from 'typeorm';
-import { WinstonModule } from 'nest-winston';
+import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { WinstonModule } from 'nest-winston'
+import { Connection } from 'typeorm'
+import { databaseConfig, winstonLogger } from './common'
+import { FrequenciesModule } from './frequencies/frequencies.module'
+import { ScannersModule } from './scanners/scanners.module'
+import { ScansModule } from './scans/scans.module'
+import { TopicsModule } from './topics/topics.module'
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       ...databaseConfig,
-      type: 'postgres',
       entities: ['./**/*.entity{.ts,.js}'],
       synchronize: true,
+      type: 'postgres'
     }),
     TopicsModule,
     FrequenciesModule,
