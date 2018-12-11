@@ -1,2 +1,2 @@
-export * from './ITopic';
-export * from './ITopicService';
+export * from './ITopic'
+export * from './ITopicService'

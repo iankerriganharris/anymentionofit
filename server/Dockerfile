@@ -17,12 +17,7 @@ RUN npm install
 COPY wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
 
-COPY docker-entrypoint.sh /app
-COPY tsconfig.json /app
-COPY tslint.json /app
-COPY nodemon.json /app
-COPY nodemon-debug.json /app
-COPY webpack.config.js /app
+COPY . /app
 
 # start dev server
 ENTRYPOINT ["sh", "docker-entrypoint.sh"]

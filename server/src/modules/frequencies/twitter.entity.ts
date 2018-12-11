@@ -1,18 +1,18 @@
-import { IFrequencyClient } from './interfaces';
-import * as twitter from 'twitter';
-import { twitterConfig } from '../common';
+import * as twitter from 'twitter'
+import { twitterConfig } from '../common'
+import { IFrequencyClient } from './interfaces'
 
 export class Twitter implements IFrequencyClient {
-  client: twitter;
+  public client: twitter
 
   constructor() {
     this.client = new twitter(twitterConfig)
   }
 
   public async search(q) {
-    return await this.client.get('search/tweets', {
+    return this.client.get('search/tweets', {
       q,
       result_type: 'popular'
-    });
+    })
   }
 }

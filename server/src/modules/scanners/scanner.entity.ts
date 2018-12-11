@@ -1,26 +1,24 @@
-import { 
-  Entity, Column, PrimaryGeneratedColumn, 
-  ManyToMany, JoinTable, OneToMany } from 'typeorm';
-import { Topic } from '../topics/topic.entity';
-import { Frequency } from '../frequencies/frequency.entity';
-import { Scan } from '../scans/scan.entity';
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Frequency } from '../frequencies/frequency.entity'
+import { Scan } from '../scans/scan.entity'
+import { Topic } from '../topics/topic.entity'
 
 @Entity()
 export class Scanner {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number
 
   @Column({ length: 100 })
-  name: string;
+  public name: string
 
   @ManyToMany(type => Topic)
   @JoinTable()
-  topics: Topic[];
+  public topics: Topic[]
 
-  @ManyToMany(type => Frequency, { eager: true})
+  @ManyToMany(type => Frequency, { eager: true })
   @JoinTable()
-  frequencies: Frequency[];
+  public frequencies: Frequency[]
 
   @OneToMany(type => Scan, scan => scan.scanner)
-  scans: Scan[];
+  public scans: Scan[]
 }

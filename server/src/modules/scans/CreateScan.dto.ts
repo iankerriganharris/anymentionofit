@@ -1,5 +1,4 @@
-
 export class CreateScanDto {
-  readonly name: string;
-  readonly scannerId: number;
+  public readonly name: string
+  public readonly scannerId: number
 }

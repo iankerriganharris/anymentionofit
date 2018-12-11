@@ -1,5 +1,3 @@
-
-
 export class CreateTopicDto {
-  readonly name: string;
+  public readonly name: string
 }

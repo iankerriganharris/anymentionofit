@@ -1,5 +1,3 @@
+import { Scan } from '../scan.entity'
 
-import { Scan } from '../scan.entity';
-
-export interface IScanService {
-}
+export interface IScanService {}

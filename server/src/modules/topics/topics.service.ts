@@ -1,28 +1,28 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { MessageCodeError } from '../common/lib/error/MessageCodeError';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, getConnection } from 'typeorm';
-import { ITopicService } from './interfaces/ITopicService';
-import { Topic } from './topic.entity';
-import { ITopic } from './interfaces/ITopic';
-import { CreateTopicDto } from './CreaterTopic.dto';
-import { ScannersService } from '../scanners/scanners.service';
-import { CreateScannerDto } from '../scanners/CreateScanner.dto';
-import { Result } from '../results/result.entity';
+import { Inject, Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { getConnection, Repository } from 'typeorm'
+import { MessageCodeError } from '../common/lib/error/MessageCodeError'
+import { Result } from '../results/result.entity'
+import { CreateScannerDto } from '../scanners/CreateScanner.dto'
+import { ScannersService } from '../scanners/scanners.service'
+import { CreateTopicDto } from './CreaterTopic.dto'
+import { ITopic } from './interfaces/ITopic'
+import { ITopicService } from './interfaces/ITopicService'
+import { Topic } from './topic.entity'
 
 @Injectable()
 export class TopicsService implements ITopicService {
   constructor(
     @InjectRepository(Topic)
     private readonly topicsRepository: Repository<Topic>
-  ) { }
+  ) {}
 
-  public async findAll(options?: any): Promise<Array<Topic>> {
-      return await this.topicsRepository.find(options);
+  public async findAll(options?: any): Promise<Topic[]> {
+    return this.topicsRepository.find(options)
   }
 
   public async findById(id: number): Promise<Topic | null> {
-      return await this.topicsRepository.findOne(id);
+    return this.topicsRepository.findOne(id)
   }
 
   public async create(topic: CreateTopicDto): Promise<Topic> {
@@ -38,7 +38,7 @@ export class TopicsService implements ITopicService {
   }
 
   public async addResult(topic: Topic, result: Result) {
-    return await getConnection()
+    return getConnection()
       .createQueryBuilder()
       .relation(Topic, 'results')
       .of(topic)

@@ -1,17 +1,17 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { MessageCodeError } from '../common/lib/error/MessageCodeError';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, In } from 'typeorm';
-import { Result } from './result.entity';
-import { IResultService } from './interfaces';
-import { CreateResultDto } from './CreateResult.dto';
+import { Inject, Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { In, Repository } from 'typeorm'
+import { MessageCodeError } from '../common/lib/error/MessageCodeError'
+import { CreateResultDto } from './CreateResult.dto'
+import { IResultService } from './interfaces'
+import { Result } from './result.entity'
 
 @Injectable()
 export class ResultsService implements IResultService {
   constructor(
     @InjectRepository(Result)
-    private readonly resultsRepository: Repository<Result>,
-  ) { }
+    private readonly resultsRepository: Repository<Result>
+  ) {}
 
   public async create(result: CreateResultDto): Promise<Result> {
     const createdResult = await this.resultsRepository.create(result)
@@ -20,7 +20,6 @@ export class ResultsService implements IResultService {
   }
 
   public async findById(id: number): Promise<Result | null> {
-    return await this.resultsRepository.findOne(id, { relations: ['scan', 'scan.scanner', 'frequency'], cache: true});
+    return this.resultsRepository.findOne(id, { relations: ['scan', 'scan.scanner', 'frequency'], cache: true })
   }
-
 }
