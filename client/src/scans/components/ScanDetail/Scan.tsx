@@ -25,7 +25,8 @@ const renderResults = (results: IScan['results']) =>
 
 const ResultItem: React.FunctionComponent<IScan['results'][0]> = (props: IScan['results'][0]) => (
   <div>
-    <Link to={`results/${props.id}`}>{props.topic.name}</Link>
     <LogoSwitch company={props.frequency.name} />
+    &nbsp;
+    <Link to={`results/${props.id}`}>{props.topic.name}</Link>
   </div>
 )

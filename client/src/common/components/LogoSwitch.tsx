@@ -5,6 +5,7 @@ import { IoLogoReddit, IoLogoTwitter, IoLogoRss } from 'react-icons/io'
 interface IProps {
   company: string
   size?: string
+  color?: string
 }
 
 interface ILogos {
@@ -23,6 +24,11 @@ const getLogo = (company: string) => {
 
 const getSize = (size: string | undefined) => (size ? size : '1em')
 
-export default (props: IProps) => (
-  <IconContext.Provider value={{ size: getSize(props.size) }}>{getLogo(props.company)}</IconContext.Provider>
-)
+const getColor = (color: string | undefined) => (color ? color : 'black')
+
+export default (props: IProps) =>
+  props.company ? (
+    <IconContext.Provider value={{ size: getSize(props.size), color: getColor(props.color) }}>
+      {getLogo(props.company)}
+    </IconContext.Provider>
+  ) : null

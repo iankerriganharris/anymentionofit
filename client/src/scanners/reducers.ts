@@ -31,7 +31,8 @@ export default function reducer(state = initialState, action: Action) {
       return {
         ...state,
         currentScanner: {
-          isFetching: true
+          isFetching: true,
+          data: {}
         }
       }
     case types.FETCH_SCANNER_BY_ID_ERROR:
