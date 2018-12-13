@@ -21,6 +21,9 @@ export const getResultById = (id: string) => ({
 })
 
 export function* fetchResultById({ payload: id }: AnyAction) {
+  yield put({
+    type: 'FETCH_RESULT_BY_ID'
+  })
   try {
     const result = yield call(api.getResultById, id)
     yield put(fetchResultByIdSuccess(result))

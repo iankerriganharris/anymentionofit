@@ -9,8 +9,8 @@ interface IProps extends IScanner {}
 export const Scanner: React.SFC<IProps> = (props: IScanner) => (
   <div>
     <h3>{props.name}</h3>
-    {renderFrequencies(props.frequencies)}
-    <ListGroup>{renderScans(props.scans)}</ListGroup>
+    {props.frequencies ? renderFrequencies(props.frequencies) : null}
+    {props.scans ? <ListGroup>{renderScans(props.scans)}</ListGroup> : null}
   </div>
 )
 

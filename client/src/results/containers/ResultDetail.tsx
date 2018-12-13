@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { getResultById } from '../actions'
 import ResultDetail from '../components/ResultDetail'
 import { RouteComponentProps, withRouter } from 'react-router'
+import { BreadcrumbItem, Breadcrumb } from 'reactstrap'
+import { Link } from 'react-router-dom'
 
 interface MatchParams {
   id: string
@@ -10,11 +12,13 @@ interface MatchParams {
 
 interface IProps extends RouteComponentProps<MatchParams> {
   getResultById: Function
+  data: any
+  isFetching: boolean
 }
 
 interface IState {
   results: {
-    currentResult: object
+    currentResult: any
   }
 }
 
@@ -29,7 +33,7 @@ class ResultDetailContainer extends React.Component<IProps, object> {
   }
 
   render() {
-    return <ResultDetail {...this.props} />
+    return !this.props.isFetching ? <ResultDetail {...this.props} /> : null
   }
 }
 

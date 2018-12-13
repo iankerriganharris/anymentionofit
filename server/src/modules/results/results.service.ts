@@ -20,6 +20,6 @@ export class ResultsService implements IResultService {
   }
 
   public async findById(id: number): Promise<Result | null> {
-    return this.resultsRepository.findOne(id, { relations: ['scan', 'scan.scanner', 'frequency'], cache: true })
+    return this.resultsRepository.findOne(id, { relations: ['scan', 'scan.scanner', 'frequency', 'topic'], cache: true })
   }
 }

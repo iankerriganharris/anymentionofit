@@ -1,4 +1,4 @@
-declare module "anymentionofit/results" {
+declare module 'anymentionofit/results' {
   interface IBaseAction {
     type: string
   }
@@ -18,6 +18,10 @@ declare module "anymentionofit/results" {
       id: string
       name: string
     }
+    topic: {
+      id: string
+      name: string
+    }
   }
 
   export interface IResultSuccessAction {
@@ -28,5 +32,4 @@ declare module "anymentionofit/results" {
   export interface IResultSuccess extends IBaseAction {
     result: object
   }
-
 }
