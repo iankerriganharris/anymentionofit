@@ -1,5 +1,20 @@
-import { Body, Catch, Controller, Delete, Get, HttpCode, HttpStatus, Inject, Param, Post, Put, Request, Response } from '@nestjs/common'
-import { Logger } from 'winston'
+import {
+  Body,
+  Catch,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Inject,
+  Param,
+  Post,
+  Put,
+  Query,
+  Request,
+  Response
+} from '@nestjs/common'
+import { Logger, query } from 'winston'
 import { MessageCodeError } from '../common/index'
 import { CreateScannerDto } from './CreateScanner.dto'
 import { ScannersService } from './scanners.service'
@@ -18,13 +33,18 @@ export class ScannersController {
   }
 
   @Get()
-  public async index(@Response() res) {
-    const Scanners = await this.scannersService.findAll()
+  public async index(@Query() options, @Response() res) {
+    const Scanners = await this.scannersService.findAll(options)
     return res.status(HttpStatus.OK).json(Scanners)
   }
 
   @Get(':id')
   public async one(@Param('id') id) {
     return this.scannersService.findById(id)
+  }
+
+  @Delete(':id')
+  public async deleteOne(@Param('id') id) {
+    return this.scannersService.deleteById(id)
   }
 }

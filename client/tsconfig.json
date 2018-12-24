@@ -14,15 +14,12 @@
     "noEmit": true,
     "jsx": "preserve"
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "files": [
     "src/scanners/index.d.ts",
     "src/scans/index.d.ts",
-    "src/results/index.d.ts"
+    "src/results/index.d.ts",
+    "src/notifications/index.d.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

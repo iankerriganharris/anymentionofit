@@ -1,6 +1,6 @@
 export default () => [
-  {
-    label: 'Scanners',
-    destination: '/scanners'
-  }
+  // {
+  //   label: 'Scanners',
+  //   destination: '/scanners'
+  // }
 ]

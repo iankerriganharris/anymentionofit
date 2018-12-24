@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import PureScannerBreadcrumb from '../components/Breadcrumb'
+import PureScanBreadcrumb from '../components/Breadcrumb'
 
 const mapStateToProps = (state: any) => {
   return {
@@ -9,4 +9,4 @@ const mapStateToProps = (state: any) => {
   }
 }
 
-export default connect(mapStateToProps)(PureScannerBreadcrumb)
+export default connect(mapStateToProps)(PureScanBreadcrumb)

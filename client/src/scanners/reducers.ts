@@ -1,12 +1,13 @@
 // reducer
 import * as types from './types'
 import { IScannerAction, IScannerSuccessAction } from 'anymentionofit/scanners'
+import { AnyAction } from 'redux'
 
 const initialState = {}
 
 type Action = IScannerAction | IScannerSuccessAction
 
-export default function reducer(state = initialState, action: Action) {
+export default function reducer(state = initialState, action: AnyAction) {
   switch (action.type) {
     case types.FETCH_SCANNERS_REQUEST:
       return {
@@ -46,6 +47,10 @@ export default function reducer(state = initialState, action: Action) {
           data: action.scanner,
           isFetching: false
         }
+      }
+    case types.DELETE_SCANNER_BY_ID_SUCCESS:
+      return {
+        ...state
       }
     default:
       return state

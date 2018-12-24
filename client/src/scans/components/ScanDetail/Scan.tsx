@@ -14,16 +14,28 @@ export const Scan = (props: IScan) => (
 const renderResults = (results: IScan['results']) =>
   results
     .sort((resultA, resultB) =>
-      resultA.frequency.name < resultB.frequency.name ? -1 : resultA.frequency.name > resultB.frequency.name ? 1 : 0
+      resultA.frequency.name < resultB.frequency.name
+        ? -1
+        : resultA.frequency.name > resultB.frequency.name
+        ? 1
+        : 0
     )
-    .sort((resultA, resultB) => (resultA.topic.name < resultB.topic.name ? -1 : resultA.topic.name > resultB.topic.name ? 1 : 0))
+    .sort((resultA, resultB) =>
+      resultA.topic.name < resultB.topic.name
+        ? -1
+        : resultA.topic.name > resultB.topic.name
+        ? 1
+        : 0
+    )
     .map((result, i) => (
       <ListGroupItem key={i}>
         <ResultItem {...result} />
       </ListGroupItem>
     ))
 
-const ResultItem: React.FunctionComponent<IScan['results'][0]> = (props: IScan['results'][0]) => (
+const ResultItem: React.FunctionComponent<IScan['results'][0]> = (
+  props: IScan['results'][0]
+) => (
   <div>
     <LogoSwitch company={props.frequency.name} />
     &nbsp;

@@ -1,9 +1,10 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
+import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap'
 
 interface IProps {
   handleSubmit: Function
   handleChange: Function
+  error: boolean
 }
 
 export default (props: IProps) => (
@@ -16,6 +17,13 @@ export default (props: IProps) => (
       <Label>Topic</Label>
       <Input name="topic" onChange={e => props.handleChange(e)} />
     </FormGroup>
-    <Button onClick={() => props.handleSubmit()}>Submit</Button>
+    <Button color="success" onClick={() => props.handleSubmit()}>
+      Submit
+    </Button>
+    {props.error ? (
+      <Alert className="mt-3" color="warning">
+        Complete all fields to submit.
+      </Alert>
+    ) : null}
   </Form>
 )

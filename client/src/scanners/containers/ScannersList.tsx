@@ -20,9 +20,6 @@ interface IState {
 }
 
 class ScannersList extends React.Component<IProps, object> {
-  constructor(props: IProps) {
-    super(props)
-  }
   componentDidMount() {
     this.props.getScanners()
   }

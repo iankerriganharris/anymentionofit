@@ -4,6 +4,7 @@ import { WinstonModule } from 'nest-winston'
 import { Connection } from 'typeorm'
 import { databaseConfig, winstonLogger } from './common'
 import { FrequenciesModule } from './frequencies/frequencies.module'
+import { NotificationsModule } from './notifications/notifications.module'
 import { ScannersModule } from './scanners/scanners.module'
 import { ScansModule } from './scans/scans.module'
 import { TopicsModule } from './topics/topics.module'
@@ -20,6 +21,7 @@ import { TopicsModule } from './topics/topics.module'
     FrequenciesModule,
     ScannersModule,
     ScansModule,
+    NotificationsModule,
     WinstonModule.forRoot(winstonLogger)
   ]
 })

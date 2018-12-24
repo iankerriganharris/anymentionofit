@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getScannerById } from '../actions'
+import { getScannerById, deleteScannerByIdRequest } from '../actions'
 import ScannerDetail from '../components/ScannerDetail'
 import { IScanner } from 'anymentionofit/scanners'
 import { RouteComponentProps } from 'react-router'
+import Spinner from 'react-spinkit'
 
 interface MatchParams {
   id: string
@@ -13,6 +14,7 @@ interface IProps extends RouteComponentProps<MatchParams> {
   data: IScanner
   isFetching: boolean
   getScannerById: Function
+  deleteScannerByIdRequest: Function
 }
 
 interface IState {
@@ -45,8 +47,18 @@ class AsyncScanner extends React.Component<IProps, object> {
     }
   }
 
+  handleDelete = () =>
+    this.props.deleteScannerByIdRequest(
+      this.props.match.params.id,
+      this.props.history.push
+    )
+
   render() {
-    return <ScannerDetail {...this.props} />
+    return this.props.isFetching || !this.props.data ? (
+      <Spinner name="circle" color="coral" />
+    ) : (
+      <ScannerDetail {...this.props} handleDelete={this.handleDelete} />
+    )
   }
 }
 
@@ -58,5 +70,5 @@ const mapStateToProps = (state: IState) => {
 
 export default connect(
   mapStateToProps,
-  { getScannerById }
+  { getScannerById, deleteScannerByIdRequest }
 )(AsyncScanner)

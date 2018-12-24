@@ -15,7 +15,7 @@ export class Scanner {
   @JoinTable()
   public topics: Topic[]
 
-  @ManyToMany(type => Frequency, { eager: true })
+  @ManyToMany(type => Frequency)
   @JoinTable()
   public frequencies: Frequency[]
 

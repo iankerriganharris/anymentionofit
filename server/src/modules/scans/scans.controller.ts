@@ -1,4 +1,16 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Request, Response } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  Request,
+  Response
+} from '@nestjs/common'
 import { MessageCodeError } from '../common/index'
 import { CreateScanDto } from './CreateScan.dto'
 import { ScansService } from './scans.service'

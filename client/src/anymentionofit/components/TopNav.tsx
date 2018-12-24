@@ -1,6 +1,7 @@
 import React from 'react'
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap'
+import { Navbar, NavbarBrand, Nav, NavItem, Container } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import { NotificationDropdownContainer } from '../../notifications/containers'
 
 interface IProps {
   brand: string
@@ -11,14 +12,17 @@ interface IProps {
 }
 
 export default (props: IProps) => (
-  <div>
-    <Navbar>
+  <Navbar>
+    <Container>
       <NavbarBrand tag={Link} to="/">
         {props.brand}
       </NavbarBrand>
-      <Nav>{renderLinks(props.links)}</Nav>
-    </Navbar>
-  </div>
+      <Nav>
+        <NotificationDropdownContainer />
+        {renderLinks(props.links)}
+      </Nav>
+    </Container>
+  </Navbar>
 )
 
 const renderLinks = (links: IProps['links']) =>

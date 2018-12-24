@@ -74,6 +74,18 @@ services:
       - ./client/public:/app/public
 
 ######################
+# worker container
+######################
+  worker:
+    build: ./worker
+    ports:
+      - 5001:5001
+    volumes:
+      - ./worker/src:/app/src
+
+
+
+######################
 # end services
 ######################
 
