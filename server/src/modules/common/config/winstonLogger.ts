@@ -21,7 +21,7 @@ const devConfig = {
     // `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
     //
     new winston.transports.Console({
-      format: winston.format.combine(winston.format.timestamp(), winston.format.colorize(), winston.format.simple())
+      format: winston.format.combine(winston.format.timestamp(), winston.format.json())
     })
   ]
 }

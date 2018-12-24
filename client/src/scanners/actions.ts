@@ -76,6 +76,31 @@ export function* fetchScannerById({ payload: id }: AnyAction) {
   }
 }
 
+/**
+ * Delete scanner by id
+ */
+
+export const deleteScannerByIdRequest = (id: string, push: Function) => ({
+  push,
+  payload: id,
+  type: 'DELETE_SCANNER_BY_ID'
+})
+
+export const deleteScannerByIdSuccess = () => ({
+  type: types.FETCH_SCANNER_BY_ID_SUCCESS
+})
+
+export function* deleteScannerById({ payload: id, push }: AnyAction) {
+  console.log('deleting...')
+  try {
+    yield call(api.deleteScannerById, id)
+    yield put(deleteScannerByIdSuccess())
+    yield call(push, `/scanners/`)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const createScannerSuccess = (scanner: object): IScannerSuccess => ({
   scanner,
   type: types.CREATE_SCANNER_SUCCESS

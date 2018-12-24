@@ -52,6 +52,9 @@ export class ScansService implements IScanService {
   }
 
   public async findById(id: number): Promise<Scan | null> {
-    return this.scansRepository.findOne(id, { relations: ['scanner', 'results', 'results.topic', 'results.frequency'], cache: true })
+    return this.scansRepository.findOne(id, {
+      cache: true,
+      relations: ['scanner', 'results', 'results.topic', 'results.frequency']
+    })
   }
 }

@@ -11,7 +11,7 @@ export class Result {
   @Column('jsonb')
   public raw: Object
 
-  @ManyToOne(type => Scan, scan => scan.results)
+  @ManyToOne(type => Scan, scan => scan.results, { onDelete: 'CASCADE' })
   public scan: Scan
 
   @ManyToOne(type => Topic, topic => topic.results)

@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { In, Repository } from 'typeorm'
-import { MessageCodeError } from '../common/lib/error/MessageCodeError'
+import { DeleteResult, In, Repository } from 'typeorm'
+import { Logger } from 'winston'
 import { FrequenciesService } from '../frequencies/frequencies.service'
 import { TopicsService } from '../topics/topics.service'
 import { CreateScannerDto } from './CreateScanner.dto'
@@ -16,7 +16,8 @@ export class ScannersService implements IScannerService {
     @Inject(FrequenciesService)
     private readonly frequenciesService: FrequenciesService,
     @Inject(TopicsService)
-    private readonly topicsService: TopicsService
+    private readonly topicsService: TopicsService,
+    @Inject('winston') private readonly logger: Logger
   ) {}
 
   public async create(Scanner: CreateScannerDto): Promise<Scanner> {
@@ -35,10 +36,37 @@ export class ScannersService implements IScannerService {
   }
 
   public async findAll(options?: any): Promise<Scanner[]> {
-    return this.scannersRepository.find({ ...options, cache: true })
+    return options.limitTo === 'ids'
+      ? this.scannersRepository
+          .createQueryBuilder('scanner')
+          .select(['scanner.id'])
+          .cache(true)
+          .getMany()
+      : this.scannersRepository.find({
+          cache: true,
+          order: { id: 'DESC' },
+          relations: ['frequencies']
+        })
   }
 
   public async findById(id: number): Promise<Scanner | null> {
-    return this.scannersRepository.findOne(id, { relations: ['topics', 'scans'], cache: true })
+    return this.scannersRepository
+      .createQueryBuilder('scanner')
+      .leftJoinAndSelect('scanner.frequencies', 'frequencies')
+      .leftJoinAndSelect('scanner.topics', 'topics')
+      .leftJoinAndSelect('scanner.scans', 'scans')
+      .where(`scanner.id = ${id}`)
+      .orderBy('scans.id', 'DESC')
+      .cache(true)
+      .getOne()
+  }
+
+  public async deleteById(id: number): Promise<DeleteResult> {
+    return this.scannersRepository
+      .createQueryBuilder()
+      .delete()
+      .from(Scanner)
+      .where(`id = ${id}`)
+      .execute()
   }
 }

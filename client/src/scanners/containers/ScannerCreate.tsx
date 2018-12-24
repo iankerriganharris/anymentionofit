@@ -12,29 +12,47 @@ interface IProps extends RouteComponentProps {
 interface IState {}
 
 class AsyncScannerForm extends React.Component<IProps, ComponentState> {
+  constructor(props: IProps) {
+    super(props)
+    this.state = { error: false }
+  }
   handleSubmit = () => {
-    const data = {
-      name: this.state.name,
-      topics: [
-        {
-          name: this.state.topic
-        }
-      ]
-    }
-    return this.props.createScannerRequest(data, this.props.history.push)
+    const data =
+      this.state && this.state.name && this.state.topic
+        ? {
+            name: this.state.name,
+            topics: [
+              {
+                name: this.state.topic
+              }
+            ]
+          }
+        : false
+    return data
+      ? this.props.createScannerRequest(data, this.props.history.push)
+      : this.setState({ error: true })
   }
 
   handleChange = async (event: FormEvent<HTMLInputElement>) => {
     const { currentTarget } = event
-    const value = currentTarget.type === 'checkbox' ? currentTarget.checked : currentTarget.value
+    const value =
+      currentTarget.type === 'checkbox'
+        ? currentTarget.checked
+        : currentTarget.value
     const { name } = currentTarget
     await this.setState({
-      [name]: value
+      [name]: value,
+      error: false
     })
-    console.log(this.state)
   }
   render() {
-    return <ScannerForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
+    return (
+      <ScannerForm
+        error={this.state.error}
+        handleSubmit={this.handleSubmit}
+        handleChange={this.handleChange}
+      />
+    )
   }
 }
 

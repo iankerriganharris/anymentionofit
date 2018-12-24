@@ -5,7 +5,7 @@ declare module 'anymentionofit/results' {
 
   export interface IResult {
     id: string
-    raw: object
+    raw: any
     scan: {
       id: string
       name: string

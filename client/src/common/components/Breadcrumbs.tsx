@@ -5,12 +5,14 @@ import withBreadcrumbs from 'react-router-breadcrumbs-hoc'
 import _ from 'lodash'
 import ScannerBreadcrumb from './ScannerBreadcrumb'
 import { ScanBreadcrumb } from '../../scans/containers'
+// import { ScannerBreadcrumb } from '../../scanners/containers'
 import { ResultBreadcrumb } from '../../results/containers'
 
 // define some custom breadcrumbs for certain routes (optional)
 const routes = [
   { path: '/', breadcrumb: null },
-  { path: '/scanners/:id/', breadcrumb: ScannerBreadcrumb },
+  { path: '/scanners/new', breadcrumb: null },
+  { path: '/scanners/:id', breadcrumb: ScannerBreadcrumb },
   { path: '/scanners/:id/scans/', breadcrumb: null },
   { path: '/scanners/:id/scans/:id', breadcrumb: ScanBreadcrumb },
   { path: '/scanners/:id/scans/:id/results/', breadcrumb: null },

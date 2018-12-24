@@ -1,4 +1,4 @@
-declare module "anymentionofit/scanners" {
+declare module 'anymentionofit/scanners' {
   interface IBaseAction {
     type: string
   }
@@ -40,5 +40,4 @@ declare module "anymentionofit/scanners" {
   }
 
   export interface IScannerError extends IBaseAction {}
-
 }

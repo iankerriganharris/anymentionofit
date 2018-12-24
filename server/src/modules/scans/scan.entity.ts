@@ -12,7 +12,7 @@ export class Scan {
   @Column({ length: 100 })
   public name: string
 
-  @ManyToOne(type => Scanner, scanner => scanner.scans)
+  @ManyToOne(type => Scanner, scanner => scanner.scans, { onDelete: 'CASCADE' })
   public scanner: Scanner
 
   @OneToMany(type => Result, result => result.scan)

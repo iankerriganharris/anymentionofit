@@ -1,5 +1,7 @@
 // import * as twitter from 'twitter'
+import { Inject } from '@nestjs/common'
 import * as twitter from 'twit'
+import { Logger } from 'winston'
 import { twitterConfig } from '../common'
 import { IFrequencyClient } from './interfaces'
 
@@ -9,6 +11,13 @@ interface ITwitterSearchResponse extends Omit<twitter.PromiseResponse, 'data'> {
   data: {
     statuses: Array<{
       text: string
+      entities: {
+        urls: Array<{
+          url: string
+        }>
+      }
+      retweet_count: number
+      favorite_count: number
     }>
   }
 }
@@ -26,7 +35,7 @@ export class Twitter implements IFrequencyClient {
       result_type: 'popular'
     })
     const { data } = response as ITwitterSearchResponse
-    const objects = data.statuses.map(status => ({ text: status.text }))
+    const objects = data.statuses.map(status => ({ text: status.text, url: status.entities.urls[0].url, likes: status.favorite_count }))
     return objects
   }
 }
