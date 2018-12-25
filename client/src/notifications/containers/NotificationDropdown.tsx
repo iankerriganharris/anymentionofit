@@ -1,16 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NotificationDropdown } from '../components'
-import { INotification } from 'anymentionofit/notifications'
+import {
+  INotification,
+  INotificationsState
+} from 'anymentionofit/notifications'
+import { resetUnseenCount, topNotificationSelector } from '../actions'
 
 interface IProps {
-  notificationList: any[]
+  notificationList: INotification[]
+  unseenCount: number
+  resetUnseenCount: Function
+  topNotificationSelector: Function
 }
 
 interface IState {
-  notifications: {
-    notificationList: INotification[]
-  }
+  notifications: INotificationsState
 }
 
 interface IContainerState {
@@ -26,10 +31,14 @@ class NotificationDropdownContainer extends React.Component<
     this.state = { isOpen: false }
   }
 
-  toggle = () => this.setState({ isOpen: !this.state.isOpen })
+  toggle = () => {
+    if (!this.state.isOpen === false) this.props.resetUnseenCount()
+    this.setState({ isOpen: !this.state.isOpen })
+  }
 
   render() {
     const { isOpen } = this.state
+    console.log(this.props)
     return (
       <NotificationDropdown
         toggle={this.toggle}
@@ -42,8 +51,12 @@ class NotificationDropdownContainer extends React.Component<
 
 const mapStateToProps = (state: IState) => {
   return {
-    ...state.notifications
+    ...state.notifications,
+    topNotifications: topNotificationSelector(state.notifications)
   }
 }
 
-export default connect(mapStateToProps)(NotificationDropdownContainer)
+export default connect(
+  mapStateToProps,
+  { resetUnseenCount, topNotificationSelector }
+)(NotificationDropdownContainer)

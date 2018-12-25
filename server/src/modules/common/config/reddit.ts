@@ -1,6 +1,6 @@
 export const redditConfig = {
-  clientId: 'ozj7OWQR5YX12g',
-  clientSecret: 'sgkPFG3qqxvQFNy3ASmaVzoELxw',
-  refreshToken: '73704986269-QVI0ZwiuVfVLYAKZMhZneOzpuVo',
+  clientId: process.env.REDDIT_ID,
+  clientSecret: process.env.REDDIT_SECRET,
+  refreshToken: process.env.REDDIT_TOKEN,
   userAgent: 'test /u/anymentionofit'
 }
