@@ -4,41 +4,51 @@ import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
-  DropdownToggle
+  DropdownToggle,
+  Fade
 } from 'reactstrap'
 import { INotification } from 'anymentionofit/notifications'
 
 interface IProps {
   notificationList: INotification[]
+  unseenCount: number
   isOpen: boolean
   toggle: (() => void)
 }
 
 const NotificationDropdown: React.FunctionComponent<IProps> = ({
   notificationList,
+  unseenCount,
   isOpen,
   toggle
 }) => (
   <Dropdown isOpen={isOpen} toggle={toggle} inNavbar>
-    <DropdownToggle color="light">
-      Notifications {renderBadge(notificationList.length)}
+    <DropdownToggle color="light" disabled={notificationList.length === 0}>
+      Notifications {renderBadge(unseenCount)}
     </DropdownToggle>
-    <DropdownMenu>{renderItems(notificationList)}</DropdownMenu>
+    <DropdownMenu>{renderItems(notificationList, isOpen)}</DropdownMenu>
   </Dropdown>
 )
 
-const renderBadge = (notificationCount: number) =>
-  notificationCount > 0 ? (
-    <Badge color="danger">{notificationCount}</Badge>
+const renderBadge = (unseenCount: number) =>
+  unseenCount > 0 ? (
+    <Badge color="danger">{unseenCount}</Badge>
   ) : (
-    <Badge color="secondary">{notificationCount}</Badge>
+    <Badge color="secondary">{unseenCount}</Badge>
   )
 
-const renderItems = (notificationList: IProps['notificationList']) =>
-  notificationList.map(notification => (
-    <DropdownItem key={notification.entityId}>
-      {notification.message}
-    </DropdownItem>
-  ))
+const renderItems = (
+  notificationList: IProps['notificationList'],
+  isOpen: boolean
+) =>
+  notificationList.map((notification, i) =>
+    notification.isNew && isOpen ? (
+      <Fade in key={i}>
+        <DropdownItem>{notification.message}</DropdownItem>
+      </Fade>
+    ) : (
+      <DropdownItem key={i}>{notification.message}</DropdownItem>
+    )
+  )
 
 export default NotificationDropdown

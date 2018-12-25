@@ -1,7 +1,3 @@
-/**
- * Taken from https://github.com/slava-lu/saga-socket-example/blob/master/client/src/modules/task.js
- */
-
 import io from 'socket.io-client'
 import { eventChannel, delay } from 'redux-saga'
 import { take, call, put, fork, race, cancelled } from 'redux-saga/effects'
@@ -18,21 +14,22 @@ const {
   ADD_NOTIFICATION,
   SERVER_OFF,
   SERVER_ON,
-  START_CHANNEL,
-  STOP_CHANNEL
+  STOP_CHANNEL,
+  RESET_UNSEEN,
+  CLEAR_NOTIFICATIONS
 } = types
 
 const socketServerURL = ''
 
-// action creators for Stop and Start buttons. You can also put them into componentDidMount
-export const startChannel = () => ({ type: START_CHANNEL })
-export const stopChannel = () => ({ type: STOP_CHANNEL })
+// action creators
+export const resetUnseenCount = () => ({ type: RESET_UNSEEN })
+export const clearNotifications = () => ({ type: CLEAR_NOTIFICATIONS })
 
 // sorting function to show the latest notifications first
 const sortNotifications = (
   notification1: INotification,
   notification2: INotification
-) => notification2.entityId - notification1.entityId
+) => notification2.id - notification1.id
 
 // selector to get only first 5 latest notifications
 const notificationSelector = (state: INotificationsState) =>
@@ -119,6 +116,7 @@ const listenServerSaga = function*() {
     yield fork(listenDisconnectSaga)
     yield fork(listenConnectSaga)
     yield put({ type: SERVER_ON })
+    yield put({ type: CLEAR_NOTIFICATIONS })
 
     while (true) {
       const payload = yield take(socketChannel)

@@ -12,7 +12,7 @@ interface IProps {
 }
 
 export default (props: IProps) => (
-  <Navbar>
+  <Navbar light>
     <Container>
       <NavbarBrand tag={Link} to="/">
         {props.brand}

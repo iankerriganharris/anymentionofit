@@ -10,3 +10,5 @@ build
 # misc
 .DS_Store
 .env
+
+dist

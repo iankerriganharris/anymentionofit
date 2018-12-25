@@ -22,7 +22,7 @@ export class NotificationsGateway implements OnModuleInit {
   public onModuleInit() {
     this.queue.process((job: Job, done: DoneCallback) => {
       this.logger.info(job.data)
-      this.server.emit('newNotification', job.data)
+      this.server.emit('newNotification', { id: job.id, ...job.data })
       done(null, job.data)
     })
   }
